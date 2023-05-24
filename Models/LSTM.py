@@ -1,5 +1,5 @@
 from keras.models import Model
-from keras.layers import Dense, Dropout, Conv1D, MaxPooling1D, LSTM, Flatten, Input, concatenate
+from keras.layers import Dense, Input, concatenate, Dropout, Conv1D, LSTM, Flatten
 
 
 def create_single_modal_LSTM() -> Model:

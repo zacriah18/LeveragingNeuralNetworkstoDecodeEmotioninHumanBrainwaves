@@ -1,5 +1,5 @@
 from keras.models import Model
-from keras.layers import Dense, SimpleRNN, Input, concatenate
+from keras.layers import Dense, Input, concatenate, SimpleRNN
 
 
 def create_single_modal_rnn() -> Model:

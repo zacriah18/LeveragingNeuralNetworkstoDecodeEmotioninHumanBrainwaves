@@ -1,5 +1,5 @@
-from keras.layers import Input, Conv1D, MaxPooling1D, Flatten, Dense, concatenate
 from keras.models import Model
+from keras.layers import Dense, Input, concatenate, Conv1D, MaxPooling1D, Flatten
 
 
 def create_single_modal_CNN() -> Model:

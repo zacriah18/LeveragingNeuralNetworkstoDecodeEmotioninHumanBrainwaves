@@ -1,5 +1,5 @@
 from keras.models import Model
-from keras.layers import Dense, GlobalAveragePooling1D, Dropout, Dense, MultiHeadAttention, LayerNormalization, Add, Concatenate, Input
+from keras.layers import Dense, Input, concatenate, GlobalAveragePooling1D, Dropout, MultiHeadAttention, LayerNormalization, Add
 
 
 def transformer_block(inputs, num_heads, dim, dropout_rate, prefix):
@@ -39,10 +39,10 @@ def create_dual_modal_Transformer() -> Model:
     x_eye = GlobalAveragePooling1D(name="average_eye")(x_eye)
 
     # Combine the brainwave and eye movement features
-    combined = Concatenate()([x_brainwave, x_eye])
+    merge = concatenate([x_brainwave, x_eye])
 
-    x = Dropout(0.1)(x)
-    x = Dense(64, activation="relu")(combined)
+    x = Dropout(0.1)(merge)
+    x = Dense(64, activation="relu")(x)
     x = Dropout(0.1)(x)
     output = Dense(5, activation="softmax")(x)
 

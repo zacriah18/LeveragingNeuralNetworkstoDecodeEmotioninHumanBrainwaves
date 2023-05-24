@@ -2,23 +2,30 @@ from typing import Tuple, List, Type, Any
 from numpy import load, empty, ndarray, concatenate, array, reshape
 import pickle
 from sklearn.model_selection import train_test_split
+import os
 
 
 def load_data(use_eye_dataset: bool = False, num_features: int = 310, num_session: int = 16) -> \
         Tuple[ndarray, ndarray, Any, Any]:
+
     # Create output list
 
     label_dict = {0: 'Disgust', 1: 'Fear', 2: 'Sad', 3: 'Neutral',
                   4: 'Happy'}  # hard-coded obtained from dataset documentation
 
+    CURRENT_DIRECTORY = os.getcwd()
+
     concatenated_data = empty((0, 310))
     concatenated_labels = empty((0))
 
-    path = "/Dataset/EEG_DE_features/"
-    if use_eye_dataset:
-        path = "/Dataset/Eye_movement_features/"
+    path = os.path.join(CURRENT_DIRECTORY, "Dataset", "EEG_DE_features")
 
-    pathFunction = lambda participant_lambda: f'{path}{participant_lambda + 1}_123.npz'
+    if use_eye_dataset:
+        concatenated_data = empty((0, 33))
+        concatenated_labels = empty((0))
+        path = os.path.join(CURRENT_DIRECTORY, "Dataset", "Eye_movement_features")
+
+    pathFunction = lambda participant_lambda: os.path.join(path, f"{participant_lambda + 1}_123.npz")
 
     for session in range(num_session):
         data_npz = load(pathFunction(session))
@@ -52,6 +59,6 @@ def load_data(use_eye_dataset: bool = False, num_features: int = 310, num_sessio
 
 
 def transfer_weights(transfer_to, transfer_from):
-    for layer in transfer_too.layers:
+    for layer in transfer_to.layers:
         if layer.name in [l.name for l in transfer_from.layers]:
             layer.set_weights(transfer_from.get_layer(layer.name).get_weights())
