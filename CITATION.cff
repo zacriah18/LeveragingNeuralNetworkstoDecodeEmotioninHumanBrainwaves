@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Bailey
+    given-names: Zack Riah
+    orcid: https://orcid.org/0009-0000-3430-676X
+title: "Efficacy of Transferring Weights in Multi-Modal to Single-Modal Frameworks in Leveraging Neural Networks to Decode Emotion in Human Brainwaves"
+version: 1.0
+doi: 10.000
+date-released: 25-05-2023
